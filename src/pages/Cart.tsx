@@ -28,7 +28,7 @@ const Cart = () => {
                     {renderCartItems}
                 </div>
             ) : (
-                <div><h2 className='text-center text-3xl py-5'>No Items In Cart</h2></div>
+                <div><h2 className='text-center text-3xl py-8'>No Items In Cart</h2></div>
             )}
         </>
     )

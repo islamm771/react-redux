@@ -1,8 +1,10 @@
-import { useDispatch } from "react-redux"
-import { IProduct } from "../interface"
-import { addItemToCart, removeItemFromCart } from "../app/features/CartSlice"
 import { FaCartShopping } from "react-icons/fa6"
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import { addItemToCart, removeItemFromCart } from "../app/features/CartSlice"
+import { addItemToFav } from "../app/features/FavouriteSlice"
+import { RootState } from "../app/store"
+import { IProduct } from "../interface"
 // import { toast } from "react-toastify"
 
 interface IProps {
@@ -12,6 +14,10 @@ interface IProps {
 
 const ProductCard = ({ product, isProductCart }: IProps) => {
   const dispatch = useDispatch()
+  const { favouriteItems } = useSelector((state: RootState) => state.favourite)
+  const handleAddToFav = (product: IProduct) => {
+    dispatch(addItemToFav(product));
+  }
 
   const handleAddToCart = (product: IProduct) => {
     dispatch(addItemToCart(product));
@@ -31,9 +37,9 @@ const ProductCard = ({ product, isProductCart }: IProps) => {
         <div className="mb-4 flex items-center justify-between gap-4">
           <span className="rounded bg-primary-100 px-2.5 py-1 text-xs font-medium text-white bg-indigo-400"> Up to {product.discountPercentage}% off </span>
 
-          <button type="button" data-tooltip-target="tooltip-add-to-favorites" className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900">
-            <span className="sr-only"> Add to Favorites </span>
-            <svg className="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <button type="button" data-tooltip-target="tooltip-add-to-favorites" className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+            onClick={() => handleAddToFav(product)}>
+            <svg className={`h-5 w-5 ${favouriteItems.find(item => item.id == product.id) ? "fill-red-500 text-red-500" : ""}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6C6.5 1 1 8 5.8 13l6.2 7 6.2-7C23 8 17.5 1 12 6Z" />
             </svg>
           </button>

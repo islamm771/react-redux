@@ -1,18 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
 import CartSlice from './features/CartSlice'
+import favouriteSlice from './features/FavouriteSlice'
 import { productsApiSlice } from './features/ProductsSlice'
-// import CounterSlice from './features/CounterSlice'
-// import PersonSlice from './features/PersonSlice'
-// import ImageSlice from './features/ImageSlice'
 
 const store = configureStore({
   reducer: {
     cart: CartSlice,
+    favourite: favouriteSlice,
     [productsApiSlice.reducerPath]: productsApiSlice.reducer,
-    // counter: CounterSlice,
-    // person: PersonSlice,
-    // image: ImageSlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(productsApiSlice.middleware)
 })

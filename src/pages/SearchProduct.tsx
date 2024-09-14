@@ -21,7 +21,7 @@ const SearchProduct = () => {
             <>
                 {data.products.length ? (<div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8 my-8'>
                     {data.products.map((product: IProduct) => <ProductCard key={product.id} product={product} />)}
-                </div>) : <div className='my-8 text-center font-bold text-2xl'>Not Found</div>
+                </div>) : <div><h2 className='text-center text-3xl py-8'>Not Found</h2></div>
                 }
             </>
         )
