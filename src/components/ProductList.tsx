@@ -27,6 +27,7 @@ const ProductList = () => {
   const handleChangePage = (page: number) => {
     setCurrentPage(page)
     setSkip((page - 1) * 20)
+    window.scrollTo(0, 0)
   }
 
   const handlePrev = () => {
