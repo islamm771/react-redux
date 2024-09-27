@@ -25,6 +25,8 @@ export interface IProductListResponse {
 
 export interface ProductListArgs {
     skip: number;
+    sortBy: string;
+    order: string;
 }
 export interface SingleProductArgs {
     id: string | undefined;

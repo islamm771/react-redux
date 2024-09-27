@@ -3,17 +3,19 @@ import { useGetProductListQuery } from "../app/features/ProductsSlice";
 import { IProduct } from "../interface";
 import ProductCard from "./ProductCard";
 import ProductSkeleton from "./ProductSkeleton";
+import { useSelector } from "react-redux";
+import { RootState } from "../app/store";
 
 const ProductList = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [skip, setSkip] = useState(0)
-  const { isLoading, data, error } = useGetProductListQuery({ skip: skip })
+  const { sortBy, order } = useSelector((state: RootState) => state.sort)
+  const { isLoading, data, error } = useGetProductListQuery({ skip: skip, sortBy, order })
   let pages: number = 0;
   if (data) {
     pages = Math.floor(data.total / 20)
     pages = pages + (data.total % 20 ? 1 : 0)
   }
-
   if (isLoading) return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 my-8">
       <ProductSkeleton />
@@ -33,11 +35,13 @@ const ProductList = () => {
   const handlePrev = () => {
     setCurrentPage(currentPage - 1)
     setSkip(skip - 20)
+    window.scrollTo(0, 0)
   }
 
   const handleNext = () => {
     setCurrentPage(currentPage + 1)
     setSkip(skip + 20)
+    window.scrollTo(0, 0)
   }
 
   if (data) {

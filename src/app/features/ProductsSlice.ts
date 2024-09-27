@@ -9,7 +9,7 @@ export const productsApiSlice = createApi({
     endpoints: (builder) => ({
         getProductList: builder.query<IProductListResponse, ProductListArgs>({
             query: (arg) => ({
-                url: `/products?limit=20&skip=${arg.skip}`,
+                url: arg.sortBy ? `/products?limit=20&skip=${arg.skip}&sortBy=${arg.sortBy}&order=${arg.order}` : `/products?limit=20&skip=${arg.skip}`,
             }),
         }),
         getSingleProduct: builder.query<IProduct, SingleProductArgs>({
