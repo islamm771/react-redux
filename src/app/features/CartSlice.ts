@@ -42,7 +42,6 @@ function addToCart(cartItems: IProduct[], product: IProduct) {
     }
 
     toast.success(`${product.title} is added to cart`);
-
     return [...cartItems, { ...product, qty: 1 }]
 
 }

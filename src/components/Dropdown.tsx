@@ -29,10 +29,10 @@ const Dropdown = ({ title, data }: IProps) => {
     }, []);
 
     return (
-        <div className="relative" ref={dropdownRef}>
+        <div className="relative w-40 md:w-48" ref={dropdownRef}>
             <button
                 id="dropdownDefaultButton"
-                className="text-indigo-500 shadow font-medium rounded-lg text-sm px-4 py-3 text-center inline-flex items-center justify-between w-48 capitalize"
+                className="text-indigo-500 shadow font-medium rounded-lg text-sm px-4 py-3 text-center inline-flex items-center justify-between capitalize w-full"
                 type="button"
                 onClick={() => setIsOpen(prev => !prev)}
             >
@@ -54,13 +54,13 @@ const Dropdown = ({ title, data }: IProps) => {
                 </svg>
             </button>
 
-            <div id="dropdown" className={`z-10 ${isOpen ? "block" : "hidden"} absolute bg-white divide-y divide-gray-100 rounded-lg shadow-md w-48 mt-2`}>
-                <ul className="py-2 text-sm text-gray-700 max-h-64 overflow-y-scroll" aria-labelledby="dropdownDefaultButton">
+            <div id="dropdown" className={`z-10 ${isOpen ? "block" : "hidden"} absolute bg-white divide-y divide-gray-100 rounded-lg shadow-md mt-2 overflow-x-hidden w-full`}>
+                <ul className="text-sm text-gray-700 max-h-64 overflow-y-scroll">
                     {data.map((item, idx) => (
                         <li key={idx}>
                             <Link
                                 to={`product/${item}`}
-                                className="block px-4 py-2 hover:bg-gray-100 capitalize"
+                                className={`block px-4 py-2 ${activeItem === item ? "bg-gray-100" : ""} hover:bg-gray-100 capitalize`}
                                 onClick={() => {
                                     setActiveItem(item);
                                     setIsOpen(false); // Close dropdown on selection

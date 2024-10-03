@@ -47,7 +47,7 @@ const ProductList = () => {
   if (data) {
     return (
       <>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 py-8">
           {data.products.map((product: IProduct) => <ProductCard key={product.id} product={product} />)}
         </div>
         <div className="flex gap-4 md:gap-10 items-center justify-center mt-6">
